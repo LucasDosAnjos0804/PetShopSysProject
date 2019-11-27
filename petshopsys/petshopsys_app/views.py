@@ -11,7 +11,7 @@ def login(request):
     return render(request,'petshopsys_app/login.html')
 
 def menu_cliente(request):
-    return HttpResponse("Aqui vem o menu do cliente")
+    return HttpResponse(request,'petshopsys_app/informações-pet.html')
 
 def menu_gerente(HttpResponse):
     return HttpResponse("Aqui vem o menu do genrente")
@@ -21,5 +21,5 @@ def menu_caixa(request):
 
 def menu_veterinario(request):
     return HttpResponse("Aqui vem o menu do veterinario")
-    
+
 

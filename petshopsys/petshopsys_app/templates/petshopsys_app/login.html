@@ -11,10 +11,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Login</title>
     <link href="{% static 'content/bootstrap.min.css' %}" rel="stylesheet" />
-    <!--
-        Assim funcionou por um breve momento 
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
-    -->
 </head>
 <body>
     <div class="container">
@@ -23,14 +19,19 @@
                 <div class="card card-signin my-5">
                     <div class="card-body">
                         <h5 class="card-title text-center">Login</h5>
-                        <form class="form-signin">
+
+                        <form class="form-signin" action="{% url ''%}" method="POST" >
 
                             <div class="form-label-group">
                                 <label for="inputCPF">CPF</label>
                                 <input type="cpf" id="inputCPF" class="form-control" maxlength="11" />
+                                <label for="inputSenha">Senha</label>
+                                <input type="password" id="inputSenha" class="form-control" maxlength="11" />
                             </div><br />
 
                             <a href="opcoes.aspx" class="btn btn-primary">ENTRAR</a>
+
+                            <input type="submit" value="Login" class="btn btn-primary"/>
                         </form>
                     </div>
                 </div>
