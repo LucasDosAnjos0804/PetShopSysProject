@@ -19,3 +19,6 @@ admin.site.register(ItensCompra)
 admin.site.register(ItensServico)
 admin.site.register(Compra)
 admin.site.register(NotaFiscal)
+
+#nota de rodape
+
