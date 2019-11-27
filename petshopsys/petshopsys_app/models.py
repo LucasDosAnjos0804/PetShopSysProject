@@ -127,7 +127,7 @@ class Servico (models.Model):
     def __str__ (self):
         return self.nome
 
-class Fonecedor (models.Model):
+class Fornecedor (models.Model):
     cnpj = models.CharField (verbose_name = 'CNPJ', max_length = 14, unique = True)
     nome = models.CharField (verbose_name = 'Nome', max_length = 50)
     endereco = models.CharField (verbose_name = 'Endereco', max_length = 150) 
@@ -145,7 +145,7 @@ class Produto (models.Model):
     )
 
     # cod_produto é criado altomaticamente pelo Django
-    cod_fornecedor = models.ForeignKey (Fonecedor, on_delete = models.CASCADE)
+    cod_fornecedor = models.ForeignKey (Fornecedor, on_delete = models.CASCADE)
     nome = models.CharField (verbose_name = 'Nome', max_length = 150, unique = True)
     data_de_validade = models.DateField (verbose_name = 'Data de validade')
     preco = models.FloatField (verbose_name = 'Preço')

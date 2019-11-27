@@ -1,10 +1,20 @@
-﻿<!DOCTYPE html>
+﻿{% load static %}
+<!--
+    Os staticos (css e outros) estão no diretório petshopsys_app/static/content, sim, a pasta foi renomeada, de Content para content, se editar ou adicionar algum arquivo dentro dessas dependencias deve rodar o seguinte comando
+    $ pythom manage.py colletcstatic
+-->
+
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
-    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <title>Login</title>
+    <link href="content/bootstrap.min.css" rel="stylesheet" />
+    <!--
+        Assim funcionou por um breve momento 
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+    -->
 </head>
 <body>
     <div class="container">
