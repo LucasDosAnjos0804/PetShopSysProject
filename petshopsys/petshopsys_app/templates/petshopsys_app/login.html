@@ -20,19 +20,22 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Login</h5>
 
-                        <form class="form-signin" action="{% url ''%}" method="POST" >
-
+                        <form class="form-signin" action="" method="POST" >
+                        {% csrf_token %}
                             <div class="form-label-group">
-                                <label for="inputCPF">CPF</label>
-                                <input type="cpf" id="inputCPF" class="form-control" maxlength="11" />
-                                <label for="inputSenha">Senha</label>
-                                <input type="password" id="inputSenha" class="form-control" maxlength="11" />
-                            </div><br />
-
-                            <a href="opcoes.aspx" class="btn btn-primary">ENTRAR</a>
-
+                                {% for field in form %}
+                                    <div class="fieldWrapper">
+                                        {{ field.errors }}
+                                        {{ field.label_tag}}<br>
+                                        {{ field }}
+                                    </div>
+                                    <br>
+                                {% endfor %}
+                            </div>
+                            <br>
                             <input type="submit" value="Login" class="btn btn-primary"/>
                         </form>
+
                     </div>
                 </div>
             </div>
