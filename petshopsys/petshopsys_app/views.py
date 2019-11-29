@@ -4,7 +4,7 @@ from django.template import loader
 from django.views import View
 
 from .forms import LoginForm
-from .models import Usuario,Cliente,Gerente,Caixa,Veterinario
+from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra
 
 # Create your views here.
 
@@ -20,7 +20,6 @@ class Login (View):
     def post (self,request,user):
         form = LoginForm(request.POST)
 
-        print('if do post')
         if form.is_valid():
             cpf = form.cleaned_data['cpf']
             senha = form.cleaned_data['senha']
@@ -59,8 +58,14 @@ class Login (View):
 
 
 class MenuCliente (View):
-    def get (self,request):
-        return render(request,'petshopsys_app/Cliente/informacoes_pet.html')
+
+    def get (self,request,cli):
+
+        prontuario = Compra.objects.filter(cod_cliente = cli)
+
+
+        return render(request,'petshopsys_app/Cliente/informacoes_pet.html',{'p':prontuario})
+
 
 class MenuGerente (View):
     def get (self,request):

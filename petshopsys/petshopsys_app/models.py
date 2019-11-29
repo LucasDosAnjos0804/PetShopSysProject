@@ -3,7 +3,6 @@ from django.utils import timezone
 
 # Create your models here.
 
-# Implentar os status
 
 class Usuario (models.Model):
     class Meta:
@@ -54,7 +53,7 @@ class Funcionario (Usuario):
     nome = models.CharField (verbose_name = 'Nome', max_length = 50)
     cargo = models.CharField (verbose_name = 'Cargo', max_length = 1, choices = CARGO_CHOICES)
     endereco = models.CharField (verbose_name = 'Endereço', max_length = 150)
-    telefone = models.CharField (verbose_name = 'Telefonde',max_length = 14) # +pp(ee)nnnnn-nnnn
+    telefone = models.CharField (verbose_name = 'Telefone',max_length = 14) # +pp(ee)nnnnn-nnnn
     # e o gerente?
     status_funcionario = models.CharField (verbose_name = 'Status Funcionario', max_length = 2, choices = STATUS_FUNCIONARIO)
 
@@ -105,6 +104,10 @@ class Pet (models.Model):
 class RegistrarConsulta (models.Model):
     cod_pet = models.ForeignKey (Pet, on_delete = models.CASCADE)
     cod_veterinario = models.ForeignKey (Veterinario, on_delete = models.CASCADE)
+
+    data_consulta = models.DateField(verbose_name='Data da Consulta',)
+    data_retorno = models.DateField(verbose_name='Data de Rotorno')
+    
     relatorio = models.TextField (verbose_name = 'Relatório')
 
     def __str__ (self):
