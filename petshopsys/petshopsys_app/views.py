@@ -29,25 +29,25 @@ class Login (View):
                 cliente = len(Cliente.objects.filter(cpf = cpf,senha = senha))
 
                 if cliente:
-                    return HttpResponseRedirect('Uhuuuu! Cliente')
+                    return HttpResponseRedirect('/cliente/')
                     
             elif user == 'g':
                 gerente = len(Gerente.objects.filter(cpf = cpf,senha =senha))
 
                 if gerente:
-                    return HttpResponseRedirect('Uhuuuu! Gerente')
+                    return HttpResponseRedirect('/gerente/')
 
             elif user == 'ca':
                 caixa = len(Caixa.objects.filter(cpf = cpf,senha = senha))
                 
                 if caixa:
-                    return HttpResponseRedirect('Uhuuuu! Caixa')
+                    return HttpResponseRedirect('/caixa/')
 
             elif user == 'v':
                 veterinario = len(Veterinario.objects.filter(cpf = cpf,senha = senha))
             
                 if veterinario:
-                    return HttpResponseRedirect('Uhuuuu! Veterinario')
+                    return HttpResponseRedirect('/veterinario/')
             
             return self.get(request,user)
                 
@@ -58,16 +58,19 @@ class Login (View):
         return render(request,'petshopsys_app/login.html',{'form':form})
 
 
-def menu_cliente(request):
-    return HttpResponse(request,'petshopsys_app/informações-pet.html')
+class MenuCliente (View):
+    def get (self,request):
+        return render(request,'petshopsys_app/Cliente/informacoes_pet.html')
 
-def menu_gerente(HttpResponse):
-    return HttpResponse("Aqui vem o menu do genrente")
+class MenuGerente (View):
+    def get (self,request):
+        return render(request,'petshopsys_app/Gerente/opcoes.html')
 
-def menu_caixa(request):
-    return HttpResponse("Aqui vem o menu do caixa")
+class MenuCaixa (View):
+    def get (self,request):
+        return render(request,'petshopsys_app/Caixa/registrar_venda.html')
 
-def menu_veterinario(request):
-    return HttpResponse("Aqui vem o menu do veterinario")
-
-
+class MenuVeterinario (View):
+    def get (self,request):
+        return render(request,'petshopsys_app/Veterinario/servicos_realizados_pet.html')
+    
