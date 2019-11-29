@@ -17,7 +17,7 @@ class Usuario (models.Model):
     cpf = models.CharField (verbose_name = 'CPF', max_length = 11, primary_key = True)
     senha = models.CharField (verbose_name = 'Senha', max_length = 50, default = '00000')
 
-    status_usuario = models.CharField (verbose_name = 'Status', max_length = 3, choices = STATUS_USUARIO, default = STATUS_USUARIO[1])
+    status_usuario = models.CharField (verbose_name = 'Status Usuario', max_length = 3, choices = STATUS_USUARIO, default = STATUS_USUARIO[1])
 
     # def login(self):
         
@@ -56,7 +56,7 @@ class Funcionario (Usuario):
     endereco = models.CharField (verbose_name = 'Endereço', max_length = 150)
     telefone = models.CharField (verbose_name = 'Telefonde',max_length = 14) # +pp(ee)nnnnn-nnnn
     # e o gerente?
-    status_funcionario = models.CharField (verbose_name = 'Status', max_length = 2, choices = STATUS_FUNCIONARIO)
+    status_funcionario = models.CharField (verbose_name = 'Status Funcionario', max_length = 2, choices = STATUS_FUNCIONARIO)
 
     def __str__ (self):
         return self.nome
@@ -97,7 +97,7 @@ class Pet (models.Model):
     nome = models.CharField (verbose_name = 'Nome',max_length = 150)
     tipo = models.CharField (verbose_name = 'Tipo', max_length = 50)
 
-    status_pet = models.CharField (verbose_name = 'Status', max_length = 2, choices = STATUS_PET)
+    status_pet = models.CharField (verbose_name = 'Status Pet', max_length = 2, choices = STATUS_PET)
 
     def __str__ (self):
         return self.nome
@@ -122,7 +122,7 @@ class Servico (models.Model):
     nome = models.CharField (verbose_name = 'Nome', max_length = 150, unique = True)
     preco = models.FloatField (verbose_name = 'Preco')
 
-    status_servico = models.CharField (verbose_name = 'Status', max_length = 2, choices = STATUS_SERVICO)
+    status_servico = models.CharField (verbose_name = 'Status Servico', max_length = 2, choices = STATUS_SERVICO)
 
     def __str__ (self):
         return self.nome
@@ -150,7 +150,7 @@ class Produto (models.Model):
     data_de_validade = models.DateField (verbose_name = 'Data de validade')
     preco = models.FloatField (verbose_name = 'Preço')
 
-    status_produto = models.CharField (verbose_name = 'Status', max_length = 3, choices = STATUS_PRODUTO)   
+    status_produto = models.CharField (verbose_name = 'Status Produto', max_length = 3, choices = STATUS_PRODUTO)   
 
     def __str__ (self):
         return self.nome
