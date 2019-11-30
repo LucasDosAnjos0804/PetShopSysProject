@@ -4,7 +4,7 @@ from django.template import loader
 from django.views import View
 
 from .forms import LoginForm
-from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra,Pet
+from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra,Pet,ListaItemServico,ItemServico
 
 
 # Create your views here.
@@ -63,15 +63,38 @@ class Login (View):
 class MenuCliente (View):
 
     def get (self,request,cli):
-        
-        consultas = []
+        estrutura = []
+        compras = []
+        litensservico = []
+        itensservico = []
 
-        consultas = RegistrarConsulta.objects.filter(
-            cod_pet__cpf_dono = cli
-        )
+
+        compras = Compra.objects.filter (
+            cod_cliente__cpf=cli
+            )
+
+        for compra in compras:
+            litensservico.extend(
+                ListaItemServico.objects.filter(
+                    pk=compra.cod_lista_item_servico.pk
+                )
+            )
+        for item in litensservico:
+            itensservico.extend(ItemServico.objects.filter(
+                pk=item.pk
+            ))
+        for item in itensservico:
+            print(item)
+            
+
+        # if len(consultas)>0:
+
+
+
         
-        
-        return render(request,'petshopsys_app/Cliente/informacoes_pet.html',{'consultas':consultas})
+        # return render(request,'petshopsys_app/Cliente/informacoes_pet.html',{'consultas':consultas})
+        return render(request,'petshopsys_app/Cliente/informacoes_pet.html')
+
 
 
 class MenuGerente (View):
