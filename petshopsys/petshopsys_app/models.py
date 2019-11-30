@@ -143,7 +143,7 @@ class Estoque (models.Model):
         return str(self.pk)
 
 class ItemCompra (models.Model):
-    cod_produto = models.ForeignKey (Produto, on_delete = models.CASCADE)
+    cod_produto = models.OneToOneField (Produto,on_delete=models.CASCADE)
     quantidade = models.IntegerField (verbose_name = 'Quantidade')
     preco = models.FloatField (verbose_name = 'Preço')
 
@@ -151,7 +151,7 @@ class ItemCompra (models.Model):
         return Produto.objects.filter(itemcompra__cod_produto = self.cod_produto).get().nome
 
 class ItemServico (models.Model):
-    cod_servico = models.ForeignKey (Servico, on_delete = models.CASCADE)
+    cod_servico = models.OneToOneField (Servico,on_delete=models.CASCADE)
     cod_registrar_sevico = models.ForeignKey (RegistrarConsulta, on_delete=models.CASCADE)
     quantidade = models.IntegerField (verbose_name = 'Quantidade')
     preco = models.FloatField (verbose_name = 'Preço')
@@ -176,8 +176,8 @@ class Compra (models.Model):
     
     data = models.DateTimeField (auto_now = True)
 
-    cod_lista_item_compra = models.ForeignKey (ListaItemCompra,null=True, on_delete=models.CASCADE)
-    cod_lista_item_servico = models.ForeignKey (ListaItemServico,null=True,on_delete=models.CASCADE)
+    cod_lista_item_compra = models.OneToOneField (ListaItemCompra,null=True, on_delete=models.CASCADE)
+    cod_lista_item_servico = models.OneToOneField (ListaItemServico,null=True,on_delete=models.CASCADE)
 
     preco_total = models.FloatField (verbose_name = 'Preço total')
 
