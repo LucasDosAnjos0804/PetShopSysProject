@@ -103,7 +103,7 @@ class MenuGerente (View):
 
 class MenuCaixa (View):
     def get (self,request):
-        return render(request,'petshopsys_app/Caixa/registrar_venda.html')
+        return render(request,'petshopsys_app/Caixa/opcoes-caixa.html')
 
 class MenuVeterinario (View):
     def get (self,request):

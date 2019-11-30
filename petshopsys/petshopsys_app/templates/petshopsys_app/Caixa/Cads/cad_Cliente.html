@@ -1,12 +1,14 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="cad_Cliente.aspx.vb" Inherits="petshop_sis.cad_Cliente" %>
-
+﻿{% load static %}
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Cadastro Cliente</title>
-    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="{% static 'content/bootstrap.min.css' %}" rel="stylesheet" />
+    <link rel="icon" 
+      type="image/png" 
+      href="{% static 'imgs/pawprint.png' %}" />
 </head>
 <body>
   <div class="container">
