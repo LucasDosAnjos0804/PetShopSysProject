@@ -30,7 +30,7 @@ class Cliente (Usuario):
     nome = models.CharField (verbose_name = 'Nome', max_length = 50)
     telefone = models.CharField (verbose_name = 'Telefone', max_length = 14) # +pp(ee)nnnnn-nnnn
     endereco = models.CharField (verbose_name = 'Endereço', max_length = 150)
-
+    
     def __str__ (self):
         return self.nome
 
@@ -44,14 +44,8 @@ class Funcionario (Usuario):
         ('DS','Demitido Sem Justa Causa'),
     )
 
-    CARGO_CHOICES = (
-        ("C","Caixa"),
-        ("G","Gerente"),
-        ("V","Veterinário"),
-    )
-
     nome = models.CharField (verbose_name = 'Nome', max_length = 50)
-    cargo = models.CharField (verbose_name = 'Cargo', max_length = 1, choices = CARGO_CHOICES)
+    
     endereco = models.CharField (verbose_name = 'Endereço', max_length = 150)
     telefone = models.CharField (verbose_name = 'Telefone',max_length = 14) # +pp(ee)nnnnn-nnnn
     # e o gerente?
@@ -82,21 +76,11 @@ class Veterinario (Funcionario):
         return self.nome
 
 class Pet (models.Model):
-
-    STATUS_PET = (
-        ('PC','Pet Cadastrado'),
-        ('SA','Sendo Atendido'),
-        ('VC','Vacinado'),
-        ('IN','Internado'),
-        ('FL','Falecido'),
-    )
-
+    
     #cod_pet é criado altomaticamente  pelo django
     cpf_dono = models.ForeignKey (Cliente, on_delete = models.CASCADE)
     nome = models.CharField (verbose_name = 'Nome',max_length = 150)
     tipo = models.CharField (verbose_name = 'Tipo', max_length = 50)
-
-    status_pet = models.CharField (verbose_name = 'Status Pet', max_length = 2, choices = STATUS_PET)
 
     def __str__ (self):
         return self.nome
@@ -105,27 +89,18 @@ class RegistrarConsulta (models.Model):
     cod_pet = models.ForeignKey (Pet, on_delete = models.CASCADE)
     cod_veterinario = models.ForeignKey (Veterinario, on_delete = models.CASCADE)
 
-    data_consulta = models.DateField(verbose_name='Data da Consulta',)
-    data_retorno = models.DateField(verbose_name='Data de Rotorno')
+    data_consulta = models.DateField(verbose_name='Data da Consulta')
     
     relatorio = models.TextField (verbose_name = 'Relatório')
 
     def __str__ (self):
-        return self.cod_veterinario + " " + self.cod_veterinario 
+        return self.relatorio
 
 class Servico (models.Model):
-
-    STATUS_SERVICO = (
-        ('AG','Agendado'),
-        ('CO','Concluído'),
-        ('CA','Cancelado'),
-    )
 
     #cod_servico é criado altomaticamente pelo Django
     nome = models.CharField (verbose_name = 'Nome', max_length = 150, unique = True)
     preco = models.FloatField (verbose_name = 'Preco')
-
-    status_servico = models.CharField (verbose_name = 'Status Servico', max_length = 2, choices = STATUS_SERVICO)
 
     def __str__ (self):
         return self.nome
@@ -163,33 +138,48 @@ class Estoque (models.Model):
     quantidade = models.BigIntegerField (verbose_name = 'Quantidade')
 
     def __str__ (self):
-        return self.cod_produto + " " + self.quantidade
+        return str(self.pk)
 
-class ItensCompra (models.Model):
+class ItemCompra (models.Model):
     cod_produto = models.ForeignKey (Produto, on_delete = models.CASCADE)
     quantidade = models.IntegerField (verbose_name = 'Quantidade')
     preco = models.FloatField (verbose_name = 'Preço')
 
     def __str__ (self):
-        return self.cod_produto + " " + self.quantidade + " " + self.preco
+        return Produto.objects.filter(itemcompra__cod_produto = self.cod_produto).get().nome
 
-class ItensServico (models.Model):
+class ItemServico (models.Model):
     cod_servico = models.ForeignKey (Servico, on_delete = models.CASCADE)
+    quantidade = models.IntegerField (verbose_name = 'Quantidade')
     preco = models.FloatField (verbose_name = 'Preço')
 
     def __str__ (self):
-        return self.cod_servico + " " + self.preco
+        return Servico.objects.filter (itemservico__cod_servico = self.cod_servico).get().nome
+
+class ListaItemServico (models.Model):
+    cod_item_servico = models.ManyToManyField (ItemServico)
+
+    def __str__ (self):
+        return str(self.cod_item_servico)
+
+class ListaItemCompra (models.Model):
+    cod_item_compra = models.ManyToManyField (ItemCompra)
+    def __str__ (self):
+        return str(self.cod_item_compra)
 
 class Compra (models.Model):
     cod_cliente = models.ForeignKey (Cliente, on_delete = models.CASCADE)
     cod_caixa = models.ForeignKey (Caixa, on_delete = models.CASCADE)
-
+    
     data = models.DateTimeField (auto_now = True)
 
-    cod_itens_servico = models.ManyToManyField (ItensServico)
-    cod_itens_compra = models.ManyToManyField (ItensCompra)
+    cod_lista_item_compra = models.ForeignKey (ListaItemCompra,null=True, on_delete=models.CASCADE)
+    cod_lista_item_servico = models.ForeignKey (ListaItemServico,null=True,on_delete=models.CASCADE)
 
     preco_total = models.FloatField (verbose_name = 'Preço total')
+
+    def __str__ (self):
+        return str(self.pk)
 
 
 class NotaFiscal (models.Model):
@@ -200,7 +190,10 @@ class NotaFiscal (models.Model):
 
     data_da_compra = models.DateTimeField (verbose_name = 'Data da Compra')
 
-    nome_itens_produtos = models.TextField (verbose_name = 'Lista de Produtos')
-    nome_itens_servicos = models.TextField (verbose_name = 'Lista de Serviços')
+    lista_item_produtos = models.TextField (verbose_name = 'Lista de Produtos')
+    lista_item_servicos = models.TextField (verbose_name = 'Lista de Serviços')
 
     preco_total = models.FloatField (verbose_name = 'Preco Total')
+
+    def __str__ (self):
+        return str(self.pk)

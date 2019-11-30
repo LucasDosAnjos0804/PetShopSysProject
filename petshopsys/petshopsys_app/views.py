@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from django.views import View
 
 from .forms import LoginForm
-from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra
+from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra,Pet
+
 
 # Create your views here.
 
@@ -13,6 +14,7 @@ from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,
 class Index (View):
     def get (self,request):
         return render(request,'petshopsys_app/index.html')
+
 
 class Login (View):
     user = None
@@ -28,7 +30,8 @@ class Login (View):
                 cliente = len(Cliente.objects.filter(cpf = cpf,senha = senha))
 
                 if cliente:
-                    return HttpResponseRedirect('/cliente/')
+                    # return HttpResponseRedirect('/cliente/')
+                    return redirect('MenuCliente',cli=cpf)
                     
             elif user == 'g':
                 gerente = len(Gerente.objects.filter(cpf = cpf,senha =senha))
@@ -44,7 +47,7 @@ class Login (View):
 
             elif user == 'v':
                 veterinario = len(Veterinario.objects.filter(cpf = cpf,senha = senha))
-            
+        
                 if veterinario:
                     return HttpResponseRedirect('/veterinario/')
             
@@ -52,7 +55,7 @@ class Login (View):
                 
     def get (self,request,user):
         self.user = user
-
+        
         form = LoginForm()
         return render(request,'petshopsys_app/login.html',{'form':form})
 
@@ -60,11 +63,15 @@ class Login (View):
 class MenuCliente (View):
 
     def get (self,request,cli):
+        
+        lista = []
 
-        prontuario = Compra.objects.filter(cod_cliente = cli)
+        lista = RegistrarConsulta.objects.filter(
+            cod_pet__cpf_dono = cli
+        )
 
-
-        return render(request,'petshopsys_app/Cliente/informacoes_pet.html',{'p':prontuario})
+        print(lista)
+        return render(request,'petshopsys_app/Cliente/informacoes_pet.html')
 
 
 class MenuGerente (View):
