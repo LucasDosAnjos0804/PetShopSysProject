@@ -64,14 +64,14 @@ class MenuCliente (View):
 
     def get (self,request,cli):
         
-        lista = []
+        consultas = []
 
-        lista = RegistrarConsulta.objects.filter(
+        consultas = RegistrarConsulta.objects.filter(
             cod_pet__cpf_dono = cli
         )
-
-        print(lista)
-        return render(request,'petshopsys_app/Cliente/informacoes_pet.html')
+        
+        
+        return render(request,'petshopsys_app/Cliente/informacoes_pet.html',{'consultas':consultas})
 
 
 class MenuGerente (View):

@@ -13,7 +13,7 @@ class Usuario (models.Model):
         ('OFF','Off-Line'),
     )
 
-    cpf = models.CharField (verbose_name = 'CPF', max_length = 11, primary_key = True)
+    cpf = models.CharField (verbose_name = 'CPF', max_length = 11, primary_key = True,unique=True)
     senha = models.CharField (verbose_name = 'Senha', max_length = 50, default = '00000')
 
     status_usuario = models.CharField (verbose_name = 'Status Usuario', max_length = 3, choices = STATUS_USUARIO, default = STATUS_USUARIO[1])
@@ -89,9 +89,11 @@ class RegistrarConsulta (models.Model):
     cod_pet = models.ForeignKey (Pet, on_delete = models.CASCADE)
     cod_veterinario = models.ForeignKey (Veterinario, on_delete = models.CASCADE)
 
-    data_consulta = models.DateField(verbose_name='Data da Consulta')
+    data_consulta = models.DateTimeField(verbose_name='Data da Consulta')
     
     relatorio = models.TextField (verbose_name = 'Relatório')
+
+    data_retorno = models.DateField (verbose_name='Data de Retorno')
 
     def __str__ (self):
         return self.relatorio
@@ -150,6 +152,7 @@ class ItemCompra (models.Model):
 
 class ItemServico (models.Model):
     cod_servico = models.ForeignKey (Servico, on_delete = models.CASCADE)
+    cod_registrar_sevico = models.ForeignKey (RegistrarConsulta, on_delete=models.CASCADE)
     quantidade = models.IntegerField (verbose_name = 'Quantidade')
     preco = models.FloatField (verbose_name = 'Preço')
 
