@@ -1,11 +1,10 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from django.views import View
 
-from .forms import LoginForm
-from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra,Pet,ListaItemServico,ItemServico
-
+from .forms import LoginForm,FornecedorForm
+from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra,Pet,ListaItemServico,ItemServico,Servico,Fornecedor
 
 # Create your views here.
 
@@ -63,39 +62,39 @@ class Login (View):
 class MenuCliente (View):
 
     def get (self,request,cli):
-        estrutura = []
-        compras = []
-        litensservico = []
-        itensservico = []
 
+        # lo_Compra = lo_ListaItemServico = lo_ItemServico = lo_Servicos = []
 
-        compras = Compra.objects.filter (
-            cod_cliente__cpf=cli
-            )
-
-        for compra in compras:
-            litensservico.extend(
-                ListaItemServico.objects.filter(
-                    pk=compra.cod_lista_item_servico.pk
-                )
-            )
-        for item in litensservico:
-            itensservico.extend(ItemServico.objects.filter(
-                pk=item.pk
-            ))
-        for item in itensservico:
-            print(item)
-            
-
-        # if len(consultas)>0:
-
-
-
+        # lo_Compra.extend(
+        #     Compra.objects.filter(
+        #         cod_cliente = cli
+        #     )
+        # )
+        # for o in lo_Compra:
+        #     lo_ListaItemServico.extend(
+        #         ListaItemServico.objects.filter(
+        #             cod_item_servico=o.pk
+        #     ))
         
+        # for o in lo_ListaItemServico:
+        #     lo_ItemServico.extend(
+        #         ItemServico.objects.filter(
+        #             cod_item_servico=o.pk
+        #         )
+        #     )
+
+        # for o in lo_ItemServico:
+        #     lo_Servicos.extend(
+        #         Servico.objects.filter(
+        #             cod_servico=o.pk
+        #         )
+        #     )
+            
+        # print(lo_Servicos)#printa os nomes
+
         # return render(request,'petshopsys_app/Cliente/informacoes_pet.html',{'consultas':consultas})
+
         return render(request,'petshopsys_app/Cliente/informacoes_pet.html')
-
-
 
 class MenuGerente (View):
     def get (self,request):
@@ -108,4 +107,62 @@ class MenuCaixa (View):
 class MenuVeterinario (View):
     def get (self,request):
         return render(request,'petshopsys_app/Veterinario/servicos_realizados_pet.html')
+
+
+class Cad_Cliente (View):
+    def get (self,request):
+        return render(request,'petshopsys_app/Gerente/Cads/cad_Cliente.html')
+
+# class CadFornecedor (View):
+#     def post (self,request):
+#         form = FornecedorForm(request.POST)
+
+#         if form.is_valid():
+
+#             fornecedor = form.save(commit=False)
+
+#             fornecedor.save()
+#             return redirect('MenuGerente')
     
+#     def get (self,request):
+#         form = FornecedorForm()
+#         return render(request, 'petshopsys_app/Gerente/Cads/cad_Fornecedor.html', {'form': form})
+
+
+
+
+def cadFornecedor (request):
+    if request.method == "POST":
+        form = FornecedorForm(request.POST)
+        if form.is_valid():
+            fornecedor = form.save(commit=False)
+            fornecedor.save()
+            return redirect('MenuGerente')
+    else:
+        form = FornecedorForm()
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Fornecedor.html', {'form': form})
+
+def editFornecedor (request,pk):
+    fornecedor = get_object_or_404(Fornecedor, pk=pk)
+    if request.method == "POST":
+        form = FornecedorForm(request.POST, instance=fornecedor)
+        if form.is_valid():
+            fornecedor = form.save(commit=False)
+            fornecedor.save()
+            return redirect('MenuGerente')
+    else:
+        form = FornecedorForm(instance=fornecedor)
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Fornecedor.html', {'form': form})
+
+def detFornecedor (request, pk):
+
+    fornecedor = get_object_or_404(Fornecedor, pk=pk)
+    
+    return render(request, 'petshopsys_app/Gerente/Cads/detail_Fornecedor.html', {'fornecedor': fornecedor})
+
+def listFornecedor(request):
+    #busca os dados
+    fornecedores = Fornecedor.objects.filter().order_by('nome')
+
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return render(request,'petshopsys_app/Gerente/Cads/list_Fornecedor.html',{'fornecedores':fornecedores})
