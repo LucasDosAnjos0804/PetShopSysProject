@@ -1,0 +1,40 @@
+﻿{% load static %}
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link href="{% static 'content/bootstrap.min.css' %}" rel="stylesheet" />
+    <link rel="icon" 
+      type="image/png" 
+      href="{% static 'imgs/pawprint.png' %}" />
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-9 mx-auto">
+        <div class="card card-signin flex-row my-5">
+          <div class="card-img-left d-none d-md-flex">
+             <!-- Background image for card set in CSS! -->
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center">Listando Servicos</h5>
+            
+            <!-- Comeca aki ##################################################33 -->
+            <div class="post">
+              {{servico.cnpj}}
+              {{servico.nome}}
+              {{servico.endereco}}
+              {{servico.telefone}}
+              <a class="btn btn-default" href="{% url 'EditFornecedor' pk=servico.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            </div>
+            <!-- Termina aki #########################333######### -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
