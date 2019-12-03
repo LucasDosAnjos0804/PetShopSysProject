@@ -21,32 +21,32 @@
           </div>
           <div class="card-body">
             <h5 class="card-title text-center">Cadastrando Produto</h5>
-        
+
             <form class="form-signin" action="" method="POST"> 
               {% csrf_token %}
-                <div class="form-label-group">
-                    {% for field in form %}
-                        <div class="fieldWrapper">
-                            {{ field.errors }}
-                            {{ field.label_tag}}<br>
-                            {{ field }}
-                        </div>
-                        <br>
-                    {% endfor %}
-                </div>
-                <div class="row justify-content-md-center">
-                  <div class="col col-lg-2">
+              <div class="form-label-group">
+                  {% for field in form %}
+                      <div class="fieldWrapper">
+                          {{ field.errors }}
+                          {{ field.label_tag}}<br>
+                          {{ field }}
+                      </div>
                       <br>
-                      <a href="{% url 'ListProduto' %}" class="btn btn-primary">Listar</a>
-                  </div>
-                  <div class="col-md-auto">
-                      <br>
-                      <input type="submit" value="Salvar" class="btn btn-primary"/>            
-                  </div>
-                  <div class="col col-lg-2">
-                  </div>
+                  {% endfor %}
+              </div>
+              <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+                    <br>
+                    <a href="{% url 'ListPet' %}" class="btn btn-primary">Listar</a>
                 </div>
-              </form>
+                <div class="col-md-auto">
+                    <br>
+                    <input type="submit" value="Salvar" class="btn btn-primary"/>            
+                </div>
+                <div class="col col-lg-2">
+                </div>
+              </div>
+            </form>
               
           </div>
         </div>
