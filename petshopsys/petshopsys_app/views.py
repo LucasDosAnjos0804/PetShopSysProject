@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from django.views import View
 
-from .forms import LoginForm,FornecedorForm,ServicoForm
+from .forms import LoginForm,FornecedorForm,ServicoForm,ClienteForm
 from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra,Pet,ListaItemServico,ItemServico,Servico,Fornecedor
 
 # Create your views here.
@@ -151,12 +151,6 @@ def editFornecedor (request,pk):
         form = FornecedorForm(instance=fornecedor)
     return render(request, 'petshopsys_app/Gerente/Cads/cad_Fornecedor.html', {'form': form})
 
-def detFornecedor (request, pk):
-
-    fornecedor = get_object_or_404(Fornecedor, pk=pk)
-    
-    return render(request, 'petshopsys_app/Gerente/Cads/detail_Fornecedor.html', {'fornecedor': fornecedor})
-
 def listFornecedor(request):
     #busca os dados
     fornecedores = Fornecedor.objects.all().order_by('nome')
@@ -170,15 +164,12 @@ def listFornecedor(request):
 def cadServico(request):
     if request.method == "POST":
         form = ServicoForm(request.POST)
-        print('opa')
         if form.is_valid():
-            print('oi')
             servico = form.save(commit=False)
             servico.save()
             return redirect('MenuGerente')
     else:
         form = ServicoForm()
-        print('oi2')
     return render(request, 'petshopsys_app/Gerente/Cads/cad_Servicos.html', {'form': form})
 
 def editServico (request,pk):
@@ -193,12 +184,6 @@ def editServico (request,pk):
         form = ServicoForm(instance=servico)
     return render(request, 'petshopsys_app/Gerente/Cads/cad_Servicos.html', {'form': form})
 
-def detServico (request, pk):
-
-    servico = get_object_or_404(Servico, pk=pk)
-    
-    return render(request, 'petshopsys_app/Gerente/Cads/detail_Servico.html', {'servico': servico})
-
 def listServico(request):
     #busca os dados
     servicos = Servico.objects.all().order_by('nome')
@@ -207,3 +192,36 @@ def listServico(request):
     return render(request,'petshopsys_app/Gerente/Cads/list_Servico.html',{'servicos':servicos})
 
 ########################################################################
+
+def cadCliente(request):
+    if request.method == "POST":
+        form = ClienteForm(request.POST)
+        print('opa')
+        if form.is_valid():
+            print('oi')
+            servico = form.save(commit=False)
+            servico.save()
+            return redirect('MenuGerente')
+    else:
+        form = ClienteForm()
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Cliente.html', {'form': form})
+
+def editCliente (request,pk):
+    servico = get_object_or_404(Cliente, pk=pk)
+    if request.method == "POST":
+        form = ClienteForm(request.POST, instance=servico)
+        if form.is_valid():
+            servico = form.save(commit=False)
+            servico.save()
+            return redirect('MenuGerente')
+    else:
+        form = ClienteForm(instance=servico)
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Cliente.html', {'form': form})
+
+def listCliente(request):
+    #busca os dados
+    servicos = Cliente.objects.all().order_by('nome')
+
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return render(request,'petshopsys_app/Gerente/Cads/list_Cliente.html',{'servicos':servicos})
+

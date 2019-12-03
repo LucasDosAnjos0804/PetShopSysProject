@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuario,Fornecedor,Servico
+from .models import Usuario,Fornecedor,Servico,Cliente
 
 
 
@@ -30,3 +30,8 @@ class ServicoForm (forms.ModelForm):
     class Meta :
         model = Servico
         fields = ('nome','preco',)
+
+class ClienteForm (forms.ModelForm):
+    class Meta :
+        model = Cliente
+        fields = ('cpf','senha','nome','telefone','endereco')
