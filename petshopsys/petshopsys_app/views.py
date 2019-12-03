@@ -191,7 +191,7 @@ def listServico(request):
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return render(request,'petshopsys_app/Gerente/Cads/list_Servico.html',{'servicos':servicos})
 
-########################################################################
+####################################################################################
 
 def cadCliente(request):
     if request.method == "POST":
@@ -220,8 +220,7 @@ def editCliente (request,pk):
 
 def listCliente(request):
     #busca os dados
-    servicos = Cliente.objects.all().order_by('nome')
+    clientes = Cliente.objects.all().order_by('nome')
 
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
-    return render(request,'petshopsys_app/Gerente/Cads/list_Cliente.html',{'servicos':servicos})
-
+    return render(request,'petshopsys_app/Gerente/Cads/list_Cliente.html',{'clientes':clientes})
