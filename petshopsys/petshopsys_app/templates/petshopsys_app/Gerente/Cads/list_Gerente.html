@@ -19,16 +19,14 @@
              <!-- Background image for card set in CSS! -->
           </div>
           <div class="card-body">
-            <h5 class="card-title text-center">Listando Fornecedores</h5>
+            <h5 class="card-title text-center">Listando Gerentes</h5>
             
             <!-- Comeca aki ##################################################33 -->
-            <div class="post">
-              {{fornecedor.cnpj}}
-              {{fornecedor.nome}}
-              {{fornecedor.endereco}}
-              {{fornecedor.telefone}}
-              <a class="btn btn-default" href="{% url 'EditFornecedor' pk=fornecedor.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-            </div>
+            {% for x in gerentes %}
+              <h1>########################################</h1>
+              <a href="{% url 'EditGerente' pk=x.pk %}">{{ x.nome }}</a>
+              {{x.cpf}}
+            {% endfor %}
             <!-- Termina aki #########################333######### -->
 
           </div>

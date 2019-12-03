@@ -3,8 +3,8 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from django.views import View
 
-from .forms import LoginForm,FornecedorForm,ServicoForm,ClienteForm,PetForm,ProdutoForm
-from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra,Pet,ListaItemServico,ItemServico,Servico,Fornecedor,Produto
+from .forms import LoginForm,FornecedorForm,ServicoForm,ClienteForm,PetForm,ProdutoForm,GerenteForm,VeterinarioForm,CaixaForm
+from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra,Pet,ListaItemServico,ItemServico,Servico,Fornecedor,Produto,Gerente,Veterinario,Caixa
 
 # Create your views here.
 
@@ -260,7 +260,6 @@ def listPet(request):
 
 ###############################################################################
 
-
 def cadProduto(request):
     if request.method == "POST":
         form = ProdutoForm(request.POST)
@@ -290,3 +289,104 @@ def listProduto(request):
 
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return render(request,'petshopsys_app/Gerente/Cads/list_Produto.html',{'produtos':produtos})
+
+
+###############################################################################
+
+def cadFuncionario (request):
+    return render(request,'petshopsys_app/Gerente/Cads/opcoes_Funcionario.html')
+
+###############################################################################
+def cadGerente(request):
+    if request.method == "POST":
+        form = GerenteForm(request.POST)
+        if form.is_valid():
+            gerente = form.save(commit=False)
+            gerente.save()
+            return redirect('MenuGerente')
+    else:
+        form = GerenteForm()
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Gerente.html', {'form': form})
+
+def editGerente (request,pk):
+    gerente = get_object_or_404(Gerente, pk=pk)
+    if request.method == "POST":
+        form = GerenteForm(request.POST, instance=gerente)
+        if form.is_valid():
+            gerente = form.save(commit=False)
+            gerente.save()
+            return redirect('MenuGerente')
+    else:
+        form = GerenteForm(instance=gerente)
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Gerente.html', {'form': form})
+
+def listGerente(request):
+    #busca os dados
+    gerentes = Gerente.objects.all().order_by('nome')
+
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return render(request,'petshopsys_app/Gerente/Cads/list_Gerente.html',{'gerentes':gerentes})
+
+################################################################################################
+
+def cadVeterinario(request):
+    if request.method == "POST":
+        form = VeterinarioForm(request.POST)
+        if form.is_valid():
+            veterinario = form.save(commit=False)
+            veterinario.save()
+            return redirect('MenuGerente')
+    else:
+        form = VeterinarioForm()
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Veterinario.html', {'form': form})
+
+def editVeterinario (request,pk):
+    veterinario = get_object_or_404(Veterinario, pk=pk)
+    if request.method == "POST":
+        form = VeterinarioForm(request.POST, instance=veterinario)
+        if form.is_valid():
+            veterinario = form.save(commit=False)
+            veterinario.save()
+            return redirect('MenuGerente')
+    else:
+        form = VeterinarioForm(instance=veterinario)
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Veterinario.html', {'form': form})
+
+def listVeterinario(request):
+    #busca os dados
+    veterinarios = Veterinario.objects.all().order_by('nome')
+
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return render(request,'petshopsys_app/Gerente/Cads/list_Veterinario.html',{'veterinarios':veterinarios})
+
+################################################################################################
+
+def cadCaixa(request):
+    if request.method == "POST":
+        form = CaixaForm(request.POST)
+        if form.is_valid():
+            caixa = form.save(commit=False)
+            caixa.save()
+            return redirect('MenuGerente')
+    else:
+        form = CaixaForm()
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Caixa.html', {'form': form})
+
+def editCaixa (request,pk):
+    caixa = get_object_or_404(Caixa, pk=pk)
+    if request.method == "POST":
+        form = CaixaForm(request.POST, instance=caixa)
+        if form.is_valid():
+            caixa = form.save(commit=False)
+            caixa.save()
+            return redirect('MenuGerente')
+    else:
+        form = CaixaForm(instance=caixa)
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Caixa.html', {'form': form})
+
+def listCaixa(request):
+    #busca os dados
+    caixas = Caixa.objects.all().order_by('nome')
+
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return render(request,'petshopsys_app/Gerente/Cads/list_Caixa.html',{'caixas':caixas})

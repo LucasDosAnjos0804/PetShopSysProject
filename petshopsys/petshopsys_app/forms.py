@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuario,Fornecedor,Servico,Cliente,Pet,Produto
+from .models import Usuario,Fornecedor,Servico,Cliente,Pet,Produto,Gerente,Veterinario,Caixa
 
 
 
@@ -45,3 +45,18 @@ class ProdutoForm (forms.ModelForm):
     class Meta :
         model = Produto
         fields = ('cod_fornecedor','nome','data_de_validade','preco')
+
+class GerenteForm (forms.ModelForm):
+    class Meta :
+        model = Gerente
+        fields = ('cpf','senha','nome','telefone','endereco','telefone')
+
+class VeterinarioForm (forms.ModelForm):
+    class Meta :
+        model = Veterinario
+        fields = ('cpf','senha','nome','telefone','endereco','telefone','gerente')
+
+class CaixaForm (forms.ModelForm):
+    class Meta :
+        model = Caixa
+        fields = ('cpf','senha','nome','telefone','endereco','telefone','gerente')

@@ -49,7 +49,7 @@ class Funcionario (Usuario):
     endereco = models.CharField (verbose_name = 'Endereço', max_length = 150)
     telefone = models.CharField (verbose_name = 'Telefone',max_length = 14) # +pp(ee)nnnnn-nnnn
     # e o gerente?
-    status_funcionario = models.CharField (verbose_name = 'Status Funcionario', max_length = 2, choices = STATUS_FUNCIONARIO)
+    status_funcionario = models.CharField (verbose_name = 'Status Funcionario', max_length = 2, choices = STATUS_FUNCIONARIO,default=STATUS_FUNCIONARIO[0])
 
     def __str__ (self):
         return self.nome
@@ -130,7 +130,7 @@ class Produto (models.Model):
     data_de_validade = models.DateField (verbose_name = 'Data de validade')
     preco = models.FloatField (verbose_name = 'Preço')
 
-    status_produto = models.CharField (verbose_name = 'Status Produto', max_length = 3, choices = STATUS_PRODUTO,default=STATUS_PRODUTO[1])
+    status_produto = models.CharField (verbose_name = 'Status Produto', max_length = 3, choices = STATUS_PRODUTO,default=STATUS_PRODUTO[0])
 
     def __str__ (self):
         return self.nome
