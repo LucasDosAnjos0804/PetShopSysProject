@@ -3,8 +3,8 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from django.views import View
 
-from .forms import LoginForm,FornecedorForm,ServicoForm,ClienteForm,PetForm
-from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra,Pet,ListaItemServico,ItemServico,Servico,Fornecedor
+from .forms import LoginForm,FornecedorForm,ServicoForm,ClienteForm,PetForm,ProdutoForm
+from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra,Pet,ListaItemServico,ItemServico,Servico,Fornecedor,Produto
 
 # Create your views here.
 
@@ -257,3 +257,36 @@ def listPet(request):
 
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return render(request,'petshopsys_app/Gerente/Cads/list_Pet.html',{'pets':pets})
+
+###############################################################################
+
+
+def cadProduto(request):
+    if request.method == "POST":
+        form = ProdutoForm(request.POST)
+        if form.is_valid():
+            produto = form.save(commit=False)
+            produto.save()
+            return redirect('MenuGerente')
+    else:
+        form = ProdutoForm()
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Produto.html', {'form': form})
+
+def editProduto (request,pk):
+    pet = get_object_or_404(Produto, pk=pk)
+    if request.method == "POST":
+        form = ProdutoForm(request.POST, instance=pet)
+        if form.is_valid():
+            pet = form.save(commit=False)
+            pet.save()
+            return redirect('MenuGerente')
+    else:
+        form = ProdutoForm(instance=pet)
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Produto.html', {'form': form})
+
+def listProduto(request):
+    #busca os dados
+    produtos = Produto.objects.all().order_by('nome')
+
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return render(request,'petshopsys_app/Gerente/Cads/list_Produto.html',{'produtos':produtos})

@@ -130,7 +130,7 @@ class Produto (models.Model):
     data_de_validade = models.DateField (verbose_name = 'Data de validade')
     preco = models.FloatField (verbose_name = 'Preço')
 
-    status_produto = models.CharField (verbose_name = 'Status Produto', max_length = 3, choices = STATUS_PRODUTO)
+    status_produto = models.CharField (verbose_name = 'Status Produto', max_length = 3, choices = STATUS_PRODUTO,default=STATUS_PRODUTO[1])
 
     def __str__ (self):
         return self.nome
