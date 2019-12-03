@@ -240,9 +240,9 @@ def cadPet(request):
     return render(request, 'petshopsys_app/Gerente/Cads/cad_Pet.html', {'form': form})
 
 def editPet (request,pk):
-    servico = get_object_or_404(Pet, pk=pk)
+    pet = get_object_or_404(Pet, pk=pk)
     if request.method == "POST":
-        form = PetForm(request.POST, instance=servico)
+        form = PetForm(request.POST, instance=pet)
         if form.is_valid():
             pet = form.save(commit=False)
             pet.save()
