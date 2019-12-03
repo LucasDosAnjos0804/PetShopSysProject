@@ -27,4 +27,8 @@ urlpatterns = [
     path('cadPet/',views.cadPet,name='CadPet'),
     path('listPet/',views.listPet,name='ListPet'),
     path('editPet/<int:pk>',views.editPet,name='EditPet'),
+
+    path('cadProduto/',views.cadProduto,name='CadProduto'),
+    path('listProduto/',views.listProduto,name='ListProduto'),
+    path('editProduto/<int:pk>',views.editProduto,name='EditProduto'),
 ]

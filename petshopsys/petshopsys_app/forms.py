@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuario,Fornecedor,Servico,Cliente,Pet
+from .models import Usuario,Fornecedor,Servico,Cliente,Pet,Produto
 
 
 
@@ -40,3 +40,8 @@ class PetForm (forms.ModelForm):
     class Meta :
         model = Pet
         fields = ('cpf_dono','nome','tipo')
+
+class ProdutoForm (forms.ModelForm):
+    class Meta :
+        model = Produto
+        fields = ('cod_fornecedor','nome','data_de_validade','preco')
