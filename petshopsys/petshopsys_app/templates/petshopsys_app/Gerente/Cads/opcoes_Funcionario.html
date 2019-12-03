@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>OPCOES-FUNCIONÁRIOS</title>
     <link href="{% static 'content/bootstrap.min.css' %}" rel="stylesheet" />
     <link rel="icon" 
       type="image/png" 
@@ -18,20 +18,31 @@
           <div class="card-img-left d-none d-md-flex">
              <!-- Background image for card set in CSS! -->
           </div>
+
           <div class="card-body">
-            <h5 class="card-title text-center">Escolha o Tipo de Funcionario</h5>
-            
-            <!-- Comeca aki ##################################################33 -->
-            
-              <h1>########################################</h1>
-              <a href="{% url 'CadGerente' %}">Gerente</a>
-              <h1>########################################</h1>
-              <a href="{% url 'CadVeterinario' %}">Veterinario</a>
-              <h1>########################################</h1>
-              <a href="{% url 'CadCaixa' %}">caixa</a>
-
-            <!-- Termina aki #########################333######### -->
-
+            <h5 class="card-title text-center"><b>QUAL FUNCIONÁRIO VOCÊ DESEJA CADASTRAR?</b></h5> 
+            <br>
+            <table class="table table-bordered" style="background-color:lavenderblush">
+                <thead>
+                    <tr>
+                      <th><a href="{% url 'CadGerente' %}">GERENTE</a></th>
+                      <th><a href="{% url 'CadVeterinario' %}">VETERINARIO</a></th>
+                      <th>  <a href="{% url 'CadCaixa' %}">CAIXA</a></th>
+                    </tr>
+                </thead>
+            </table>
+            <br><br><br>
+            <h5 class="card-title text-center"><b>QUER APENAS VERIFICAR OS CADASTROS JÁ FEITOS?</b></h5>
+            <br>
+            <table class="table table-bordered" style="background-color:cornsilk;">
+                <thead>
+                    <tr>
+                      <th><a href="{% url 'ListGerente' %}">LISTAR GERENTES</a></th>
+                      <th><a href="{% url 'ListVeterinario' %}">LISTAR VETERINÁRIOS</a></th>
+                      <th><a href="{% url 'ListCaixa' %}">LISTAR CAIXAS</a></th>
+                    </tr>
+                </thead>
+            </table> 
           </div>
         </div>
       </div>
