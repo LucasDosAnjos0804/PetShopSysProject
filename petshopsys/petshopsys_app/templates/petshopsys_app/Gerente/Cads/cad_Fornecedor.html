@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>CADASTRO FORNECEDOR</title>
     <link href="{% static 'content/bootstrap.min.css' %}" rel="stylesheet" />
     <link rel="icon" 
       type="image/png" 
@@ -19,36 +19,36 @@
              <!-- Background image for card set in CSS! -->
           </div>
           <div class="card-body">
-            <h5 class="card-title text-center">Cadastrando Fornecedor</h5>
-            
-            <!-- Comeca aki ################################################## -->
+            <h5 class="card-title text-center"><b>CADASTRANDO FORNECEDOR</b></h5><br>
+            <br>
+            <a href="{% url 'ListFornecedor' %}" class="btn btn-info">🔎 MOSTRAR REGISTROS EXISTENTES</a>
+            <br><br><br>
+            <!--INICIO DO FORM-->
             <form class="form-signin" action="" method="POST"> 
             {% csrf_token %}
-              <div class="form-label-group">
+                <div class="form-label-group">
                   {% for field in form %}
                       <div class="fieldWrapper">
-                          {{ field.errors }}Form
+                          {{ field.errors }}
                           {{ field.label_tag}}<br>
                           {{ field }}
                       </div>
                       <br>
                   {% endfor %}
-              </div>
-              <div class="row justify-content-md-center">
+              </div>         
+              
+            <div class="row justify-content-md-center">
                 <div class="col col-lg-2">
-                    <br>
-                    <a href="{% url 'ListFornecedor' %}" class="btn btn-primary">Listar</a>
                 </div>
                 <div class="col-md-auto">
                     <br>
-                    <input type="submit" value="Salvar" class="btn btn-primary"/>            
+                    <button class="btn btn-success" type="submit">Salvar ✅ </button>            
                 </div>
                 <div class="col col-lg-2">
-                     
                 </div>
-              </div>
+              </div>  
             </form>
-            <!-- Termina aki #########################333######### -->
+            <!-- FIM DO FORM -->
 
           </div>
         </div>
