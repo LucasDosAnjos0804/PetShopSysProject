@@ -3,7 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from django.views import View
 
-from .forms import LoginForm,FornecedorForm,ServicoForm,ClienteForm
+from .forms import LoginForm,FornecedorForm,ServicoForm,ClienteForm,PetForm
 from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra,Pet,ListaItemServico,ItemServico,Servico,Fornecedor
 
 # Create your views here.
@@ -191,7 +191,7 @@ def listServico(request):
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return render(request,'petshopsys_app/Gerente/Cads/list_Servico.html',{'servicos':servicos})
 
-########################################################################
+####################################################################################
 
 def cadCliente(request):
     if request.method == "POST":
@@ -220,8 +220,40 @@ def editCliente (request,pk):
 
 def listCliente(request):
     #busca os dados
-    servicos = Cliente.objects.all().order_by('nome')
+    clientes = Cliente.objects.all().order_by('nome')
 
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
-    return render(request,'petshopsys_app/Gerente/Cads/list_Cliente.html',{'servicos':servicos})
+    return render(request,'petshopsys_app/Gerente/Cads/list_Cliente.html',{'clientes':clientes})
 
+
+###########################################################################################
+
+def cadPet(request):
+    if request.method == "POST":
+        form = PetForm(request.POST)
+        if form.is_valid():
+            servico = form.save(commit=False)
+            servico.save()
+            return redirect('MenuGerente')
+    else:
+        form = PetForm()
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Pet.html', {'form': form})
+
+def editPet (request,pk):
+    pet = get_object_or_404(Pet, pk=pk)
+    if request.method == "POST":
+        form = PetForm(request.POST, instance=pet)
+        if form.is_valid():
+            pet = form.save(commit=False)
+            pet.save()
+            return redirect('MenuGerente')
+    else:
+        form = PetForm(instance=pet)
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Pet.html', {'form': form})
+
+def listPet(request):
+    #busca os dados
+    pets = Pet.objects.all().order_by('nome')
+
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return render(request,'petshopsys_app/Gerente/Cads/list_Pet.html',{'pets':pets})

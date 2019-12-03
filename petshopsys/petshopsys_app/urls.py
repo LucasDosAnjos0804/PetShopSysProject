@@ -23,4 +23,8 @@ urlpatterns = [
     path('cadCliente/',views.cadCliente,name='CadCliente'),
     path('listCliente/',views.listCliente,name='ListCliente'),
     path('editCliente/<int:pk>',views.editCliente,name='EditCliente'),
+
+    path('cadPet/',views.cadPet,name='CadPet'),
+    path('listPet/',views.listPet,name='ListPet'),
+    path('editPet/<int:pk>',views.editPet,name='EditPet'),
 ]

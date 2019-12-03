@@ -19,13 +19,13 @@
              <!-- Background image for card set in CSS! -->
           </div>
           <div class="card-body">
-            <h5 class="card-title text-center">Listando Clientes</h5>
+            <h5 class="card-title text-center">Listando Pets</h5>
             
             <!-- Comeca aki ##################################################33 -->
-            {% for c in clientes %}
+            {% for c in pets %}
               <h1>########################################</h1>
               <a href="{% url 'EditCliente' pk=c.pk %}">{{ c.nome }}</a>
-              {{c.cpf}}
+              {{c.cpf_dono}}
             {% endfor %}
             <!-- Termina aki #########################333######### -->
 
