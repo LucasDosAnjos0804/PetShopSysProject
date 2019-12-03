@@ -136,7 +136,7 @@ class Produto (models.Model):
         return self.nome
         
 class Estoque (models.Model):
-    cod_produto = models.ForeignKey (Produto, on_delete = models.CASCADE)
+    cod_produto = models.OneToOneField (Produto, on_delete = models.CASCADE)
     quantidade = models.BigIntegerField (verbose_name = 'Quantidade')
 
     def __str__ (self):

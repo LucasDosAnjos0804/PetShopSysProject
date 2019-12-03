@@ -2,6 +2,7 @@ from django.urls import path
 from .views import Login,Index,MenuCliente,MenuGerente,MenuCaixa,MenuVeterinario,cadFornecedor,cadServico,listServico,editServico,cadFuncionario
 
 from . import views
+
 urlpatterns = [
     path('',Index.as_view(), name = 'Index'),
 
@@ -45,4 +46,8 @@ urlpatterns = [
     path('cadCaixa/',views.cadCaixa,name='CadCaixa'),
     path('listCaixa/',views.listCaixa,name='ListCaixa'),
     path('editCaixa/<int:pk>',views.editCaixa,name='EditCaixa'),
+
+    path('cadEstoque/',views.cadEstoque,name='CadEstoque'),
+    path('listEstoque/',views.listEstoque,name='ListEstoque'),
+    path('editEstoque/<int:pk>',views.editEstoque,name='EditEstoque'),
 ]

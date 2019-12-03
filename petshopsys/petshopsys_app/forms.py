@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuario,Fornecedor,Servico,Cliente,Pet,Produto,Gerente,Veterinario,Caixa
+from .models import Usuario,Fornecedor,Servico,Cliente,Pet,Produto,Gerente,Veterinario,Caixa,Estoque
 
 
 
@@ -60,3 +60,8 @@ class CaixaForm (forms.ModelForm):
     class Meta :
         model = Caixa
         fields = ('cpf','senha','nome','telefone','endereco','telefone','gerente')
+
+class EstoqueForm (forms.ModelForm):
+    class Meta :
+        model = Estoque
+        fields = ('cod_produto','quantidade')

@@ -3,8 +3,8 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from django.views import View
 
-from .forms import LoginForm,FornecedorForm,ServicoForm,ClienteForm,PetForm,ProdutoForm,GerenteForm,VeterinarioForm,CaixaForm
-from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra,Pet,ListaItemServico,ItemServico,Servico,Fornecedor,Produto,Gerente,Veterinario,Caixa
+from .forms import LoginForm,FornecedorForm,ServicoForm,ClienteForm,PetForm,ProdutoForm,GerenteForm,VeterinarioForm,CaixaForm,EstoqueForm
+from .models import Usuario,Cliente,Gerente,Caixa,Veterinario,RegistrarConsulta,Compra,Pet,ListaItemServico,ItemServico,Servico,Fornecedor,Produto,Gerente,Veterinario,Caixa,Estoque
 
 # Create your views here.
 
@@ -390,3 +390,35 @@ def listCaixa(request):
 
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return render(request,'petshopsys_app/Gerente/Cads/list_Caixa.html',{'caixas':caixas})
+
+################################################################################################
+
+def cadEstoque(request):
+    if request.method == "POST":
+        form = EstoqueForm(request.POST)
+        if form.is_valid():
+            estoque = form.save(commit=False)
+            estoque.save()
+            return redirect('MenuGerente')
+    else:
+        form = EstoqueForm()
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Estoque.html', {'form': form})
+
+def editEstoque (request,pk):
+    estoque = get_object_or_404(Estoque, pk=pk)
+    if request.method == "POST":
+        form = EstoqueForm(request.POST, instance=estoque)
+        if form.is_valid():
+            estoque = form.save(commit=False)
+            estoque.save()
+            return redirect('MenuGerente')
+    else:
+        form = EstoqueForm(instance=estoque)
+    return render(request, 'petshopsys_app/Gerente/Cads/cad_Estoque.html', {'form': form})
+
+def listEstoque(request):
+    #busca os dados
+    estoque = Estoque.objects.all().order_by('quantidade')
+
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return render(request,'petshopsys_app/Gerente/Cads/list_Estoque.html',{'estoque':estoque})
