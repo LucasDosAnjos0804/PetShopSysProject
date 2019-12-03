@@ -18,17 +18,31 @@
           <div class="card-img-left d-none d-md-flex">
              <!-- Background image for card set in CSS! -->
           </div>
-          <div class="card-body">
-            <h5 class="card-title text-center">Listando servicos</h5>
-            
-            <!-- Comeca aki ##################################################33 -->
-            {% for s in servicos %}
-              <h1>########################################</h1>
-              <a href="{% url 'EditServico' pk=s.pk %}">{{ s.nome }}</a>
-              {{s.preco}}
-            {% endfor %}
-            <!-- Termina aki #########################333######### -->
 
+          <div class="card-body">
+            <h5 class="card-title text-center"><b>LISTANDO FORNECEDORES</b></h5> 
+            <br>
+            <table class="table table-bordered">
+              
+                <thead>
+                    <tr>
+                      <th><h6>NOME</h6></th>
+                      <th><h6>PREÇO</h6></th>
+                      <th><h6><a style="margin-left: 50px;">EDITAR</a></h6></th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for s in servicos %}
+                    <tr>
+                      <td><a>{{ s.nome }}</td>
+                      <td><a> {{s.preco}}</a></td>
+                      <td><a href="{% url 'EditServico' pk=s.pk %}" class="btn btn-warning" style="margin-left: 50px;">✎</a></td>      
+                    </tr>
+                  {% endfor %}
+                </tbody> 
+                
+            </table> 
+          </div>
           </div>
         </div>
       </div>
