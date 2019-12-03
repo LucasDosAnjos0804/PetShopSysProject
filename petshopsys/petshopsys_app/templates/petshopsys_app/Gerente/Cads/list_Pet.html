@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <title>LISTANDO PETS</title>
     <link href="{% static 'content/bootstrap.min.css' %}" rel="stylesheet" />
     <link rel="icon" 
       type="image/png" 
@@ -18,17 +18,32 @@
           <div class="card-img-left d-none d-md-flex">
              <!-- Background image for card set in CSS! -->
           </div>
-          <div class="card-body">
-            <h5 class="card-title text-center">Listando Pets</h5>
-            
-            <!-- Comeca aki ##################################################33 -->
-            {% for c in pets %}
-              <h1>########################################</h1>
-              <a href="{% url 'EditCliente' pk=c.pk %}">{{ c.nome }}</a>
-              {{c.cpf_dono}}
-            {% endfor %}
-            <!-- Termina aki #########################333######### -->
 
+          <div class="card-body">
+            <h5 class="card-title text-center"><b>LISTANDO FORNECEDORES</b></h5> 
+            <br>
+            <table class="table table-bordered">
+              
+                <thead>
+                    <tr>
+                      <th><h6>PET</h6></th>
+                      <th><h6>DONO</h6></th>
+                      <th><h6><a style="margin-left: 50px;">EDITAR</a></h6></th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for p in pets %}
+                    <tr>
+                      <td><a>{{p.nome }}</td>
+                      <td>{{p.cpf_dono}}</td>
+                      <td><a href="{% url 'EditCliente' pk=p.pk %}" class="btn btn-warning" style="margin-left: 50px;">✎</a></td>
+                     
+                    </tr>
+                  {% endfor %}
+                </tbody> 
+                
+            </table> 
+          </div>
           </div>
         </div>
       </div>
