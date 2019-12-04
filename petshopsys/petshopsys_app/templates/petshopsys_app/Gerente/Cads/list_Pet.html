@@ -20,7 +20,7 @@
           </div>
 
           <div class="card-body">
-            <h5 class="card-title text-center"><b>LISTANDO FORNECEDORES</b></h5> 
+            <h5 class="card-title text-center"><b>LISTANDO PETS</b></h5> 
             <br>
             <table class="table table-bordered">
               
@@ -29,6 +29,7 @@
                       <th><h6>PET</h6></th>
                       <th><h6>DONO</h6></th>
                       <th><h6><a style="margin-left: 50px;">EDITAR</a></h6></th>
+                      <th><h6><a style="margin-left: 50px;">EXCLUIR</a></h6></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,8 +37,12 @@
                     <tr>
                       <td><a>{{p.nome }}</td>
                       <td>{{p.cpf_dono}}</td>
-                      <td><a href="{% url 'EditCliente' pk=p.pk %}" class="btn btn-warning" style="margin-left: 50px;">✎</a></td>
-                     
+                      <td><a href="{% url 'EditPet' pk=p.pk %}" class="btn btn-warning" style="margin-left: 50px;">✎</a></td>
+                      
+                      <!-- Meu botao de excluir perdoe-me -->
+                      <td><a href="{% url 'DelPet' pk=p.pk %}" class="btn btn-warning" style="margin-left: 50px;">X</a></td>
+                      <!-- Meu botao de excluir perdoe-me -->
+                      
                     </tr>
                   {% endfor %}
                 </tbody> 

@@ -159,7 +159,6 @@ def listFornecedor(request):
     return render(request,'petshopsys_app/Gerente/Cads/list_Fornecedor.html',{'fornecedores':fornecedores})
 
 
-
 ###############################################################
 def cadServico(request):
     if request.method == "POST":
@@ -258,6 +257,14 @@ def listPet(request):
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return render(request,'petshopsys_app/Gerente/Cads/list_Pet.html',{'pets':pets})
 
+
+def delPet(request,pk):
+    #busca os dados
+    
+    pet = Pet.objects.filter(pk=pk).delete()
+
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return redirect('ListPet')
 ###############################################################################
 
 def cadProduto(request):
