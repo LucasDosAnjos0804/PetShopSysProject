@@ -28,6 +28,8 @@
                       <th><h6>NOME</h6></th>
                       <th><h6>CNPJ</h6></th>
                       <th><h6><a style="margin-left: 50px;">EDITAR</a></h6></th>
+                      <th><h6><a style="margin-left: 50px;">EXCLUIR</a></h6></th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -36,6 +38,10 @@
                       <td><a>{{ f.nome }}</td>
                       <td><a>{{f.cnpj}}</a></td>
                       <td><a href="{% url 'EditFornecedor' pk=f.pk %}" class="btn btn-warning" style="margin-left: 50px;">✎</a></td>
+
+                      <!-- Meu botao de excluir perdoe-me -->
+                      <td><a href="{% url 'DelFornecedor' pk=f.pk %}" class="btn btn-warning" style="margin-left: 50px;">X</a></td>
+                      <!-- Meu botao de excluir perdoe-me -->
                      
                     </tr>
                   {% endfor %}

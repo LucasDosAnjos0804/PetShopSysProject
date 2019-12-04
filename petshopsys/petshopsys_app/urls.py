@@ -16,6 +16,8 @@ urlpatterns = [
     path('cadFornecedor/',views.cadFornecedor,name='CadFornecedor'),
     path('listFornecedor/',views.listFornecedor,name='ListFornecedor'),
     path('editFornecedor/<int:pk>',views.editFornecedor,name='EditFornecedor'),
+    path('delFornecedor/<int:pk>',views.delFornecedor,name='DelFornecedor'),
+
 
     path('cadServico/',views.cadServico,name='CadServico'),
     path('listServico/',views.listServico,name='ListServico'),
