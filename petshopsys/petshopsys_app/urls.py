@@ -43,24 +43,24 @@ urlpatterns = [
     path('gerente/delProduto/<int:pk>',views.delProduto,name='DelProduto'),
 
 
-    path('CadFuncionario/',views.cadFuncionario,name='CadFuncionario'),
+    path('gerente/CadFuncionario/',views.cadFuncionario,name='CadFuncionario'),
 
-    path('CadFuncionario/gerente/cadGerente/',views.cadGerente,name='CadGerente'),
-    path('CadFuncionario/gerente/listGerente/',views.listGerente,name='ListGerente'),
-    path('CadFuncionario/gerente/editGerente/<int:pk>',views.editGerente,name='EditGerente'),
-    path('CadFuncionario/gerente/delGerente/<int:pk>',views.delGerente,name='DelGerente'),
-
-
-    path('CadFuncionario/gerente/cadVeterinario/',views.cadVeterinario,name='CadVeterinario'),
-    path('CadFuncionario/gerente/listVeterinario/',views.listVeterinario,name='ListVeterinario'),
-    path('CadFuncionario/gerente/editVeterinario/<int:pk>',views.editVeterinario,name='EditVeterinario'),
-    path('CadFuncionario/gerente/delVeterinario/<int:pk>',views.delVeterinario,name='DelVeterinario'),
+    path('gerente/CadFuncionario/cadGerente/',views.cadGerente,name='CadGerente'),
+    path('gerente/CadFuncionario/listGerente/',views.listGerente,name='ListGerente'),
+    path('gerente/CadFuncionario/editGerente/<int:pk>',views.editGerente,name='EditGerente'),
+    path('gerente/CadFuncionario/delGerente/<int:pk>',views.delGerente,name='DelGerente'),
 
 
-    path('CadFuncionario/gerente/cadCaixa/',views.cadCaixa,name='CadCaixa'),
-    path('CadFuncionario/gerente/listCaixa/',views.listCaixa,name='ListCaixa'),
-    path('CadFuncionario/gerente/editCaixa/<int:pk>',views.editCaixa,name='EditCaixa'),
-    path('CadFuncionario/gerente/delCaixa/<int:pk>',views.delCaixa,name='DelCaixa'),
+    path('gerente/CadFuncionario/cadVeterinario/',views.cadVeterinario,name='CadVeterinario'),
+    path('gerente/CadFuncionario/listVeterinario/',views.listVeterinario,name='ListVeterinario'),
+    path('gerente/CadFuncionario/editVeterinario/<int:pk>',views.editVeterinario,name='EditVeterinario'),
+    path('gerente/CadFuncionario/delVeterinario/<int:pk>',views.delVeterinario,name='DelVeterinario'),
+
+
+    path('gerente/CadFuncionario/cadCaixa/',views.cadCaixa,name='CadCaixa'),
+    path('gerente/CadFuncionario/listCaixa/',views.listCaixa,name='ListCaixa'),
+    path('gerente/CadFuncionario/editCaixa/<int:pk>',views.editCaixa,name='EditCaixa'),
+    path('gerente/CadFuncionario/delCaixa/<int:pk>',views.delCaixa,name='DelCaixa'),
 
 
     path('gerente/cadEstoque/',views.cadEstoque,name='CadEstoque'),
@@ -68,5 +68,6 @@ urlpatterns = [
     path('gerente/editEstoque/<int:pk>',views.editEstoque,name='EditEstoque'),
     path('gerente/delEstoque/<int:pk>',views.delEstoque,name='DelEstoque'),
 ########################################################
+
 
 ]
