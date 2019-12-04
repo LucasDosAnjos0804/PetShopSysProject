@@ -22,10 +22,14 @@ urlpatterns = [
     path('cadServico/',views.cadServico,name='CadServico'),
     path('listServico/',views.listServico,name='ListServico'),
     path('editServico/<int:pk>',views.editServico,name='EditServico'),
+    path('delServico/<int:pk>',views.delServico,name='DelServico'),
+
 
     path('cadCliente/',views.cadCliente,name='CadCliente'),
     path('listCliente/',views.listCliente,name='ListCliente'),
     path('editCliente/<int:pk>',views.editCliente,name='EditCliente'),
+    path('delCliente/<int:pk>',views.delCliente,name='DelCliente'),
+
 
     path('cadPet/',views.cadPet,name='CadPet'),
     path('listPet/',views.listPet,name='ListPet'),
@@ -36,22 +40,32 @@ urlpatterns = [
     path('cadProduto/',views.cadProduto,name='CadProduto'),
     path('listProduto/',views.listProduto,name='ListProduto'),
     path('editProduto/<int:pk>',views.editProduto,name='EditProduto'),
+    path('delProduto/<int:pk>',views.delProduto,name='DelProduto'),
+
 
     path('CadFuncionario/',views.cadFuncionario,name='CadFuncionario'),
 
     path('cadGerente/',views.cadGerente,name='CadGerente'),
     path('listGerente/',views.listGerente,name='ListGerente'),
     path('editGerente/<int:pk>',views.editGerente,name='EditGerente'),
+    path('delGerente/<int:pk>',views.delGerente,name='DelGerente'),
+
 
     path('cadVeterinario/',views.cadVeterinario,name='CadVeterinario'),
     path('listVeterinario/',views.listVeterinario,name='ListVeterinario'),
     path('editVeterinario/<int:pk>',views.editVeterinario,name='EditVeterinario'),
+    path('delVeterinario/<int:pk>',views.delVeterinario,name='DelVeterinario'),
+
 
     path('cadCaixa/',views.cadCaixa,name='CadCaixa'),
     path('listCaixa/',views.listCaixa,name='ListCaixa'),
     path('editCaixa/<int:pk>',views.editCaixa,name='EditCaixa'),
+    path('delCaixa/<int:pk>',views.delCaixa,name='DelCaixa'),
+
 
     path('cadEstoque/',views.cadEstoque,name='CadEstoque'),
     path('listEstoque/',views.listEstoque,name='ListEstoque'),
     path('editEstoque/<int:pk>',views.editEstoque,name='EditEstoque'),
+    path('delEstoque/<int:pk>',views.delEstoque,name='DelEstoque'),
+
 ]

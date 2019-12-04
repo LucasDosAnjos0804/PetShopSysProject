@@ -19,16 +19,38 @@
              <!-- Background image for card set in CSS! -->
           </div>
           <div class="card-body">
-            <h5 class="card-title text-center">Produtos no Estoque</h5>
-            
-            <!-- Comeca aki ##################################################33 -->
-            {% for x in estoque %}
-              <h1>########################################</h1>
-              <a href="{% url 'EditEstoque' pk=x.pk %}">{{ x.cod_produto }}</a>
-              {{x.pk}}<br><!-- Isso que é o código de barras ;) -->
-              {{x.quantidade}}
-            {% endfor %}
-            <!-- Termina aki #########################333######### -->
+
+              <h5 class="card-title text-center"><b>Produtos no Estoque</b></h5> 
+              <br>
+              <table class="table table-bordered">
+                
+                  <thead>
+                      <tr>
+                        <th><h6>NOME</h6></th>
+                        <th><h6>QUANTIDADE</h6></th>
+                        <th><h6>CÓDIGO</h6></th>
+                        <th><h6><a style="margin-left: 50px;">EDITAR</a></h6></th>
+                        <th><h6><a style="margin-left: 50px;">EXCLUIR</a></h6></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    {% for x in estoque %}
+                      <tr>
+                        <td><a>{{ x.cod_produto }}</td>
+                        <td>{{x.pk}}</td>
+                        <td>{{x.quantidade}}</td>
+
+                        <td><a href="{% url 'EditEstoque' pk=x.pk %}" class="btn btn-warning" style="margin-left: 50px;">✎</a></td>
+                        
+                        <!-- Meu botao de excluir perdoe-me -->
+                        <td><a href="{% url 'DelEstoque' pk=x.pk %}" class="btn btn-warning" style="margin-left: 50px;">X</a></td>
+                        <!-- Meu botao de excluir perdoe-me -->
+                        
+                      </tr>
+                    {% endfor %}
+                  </tbody> 
+                  
+              </table>
 
           </div>
         </div>

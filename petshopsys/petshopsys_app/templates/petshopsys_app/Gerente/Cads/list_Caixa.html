@@ -28,7 +28,7 @@
                     <tr>
                       <th><h6>NOME</h6></th>
                       <th><h6>CPF</h6></th>
-                      <th><h6><a style="margin-left: 50px;">EDITAR</a></h6></th>
+                      <th><h6><a style="margin-left: 50px;">EDITAR</a></h6></th>                      <th><h6><a style="margin-left: 50px;">EXCLUIR</a></h6></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +37,10 @@
                       <td><a>{{ x.nome }}</td>
                       <td><a> {{x.cpf}}</a></td>
                       <td><a href="{% url 'EditCaixa' pk=x.pk %}" class="btn btn-warning" style="margin-left: 50px;">✎</a></td>
+
+                      <!-- Meu botao de excluir perdoe-me -->
+                      <td><a href="{% url 'DelCaixa' pk=x.pk %}" class="btn btn-warning" style="margin-left: 50px;">X</a></td>
+                      <!-- Meu botao de excluir perdoe-me -->
                     </tr>
                   {% endfor %}
                 </tbody> 

@@ -194,6 +194,12 @@ def listServico(request):
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return render(request,'petshopsys_app/Gerente/Cads/list_Servico.html',{'servicos':servicos})
 
+def delServico(request,pk):
+    #busca os dados
+    servico = Servico.objects.filter(pk=pk).delete()
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return redirect('ListServico')
+
 ####################################################################################
 
 def cadCliente(request):
@@ -228,7 +234,11 @@ def listCliente(request):
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return render(request,'petshopsys_app/Gerente/Cads/list_Cliente.html',{'clientes':clientes})
 
-
+def delCliente(request,pk):
+    #busca os dados
+    cliente = Cliente.objects.filter(pk=pk).delete()
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return redirect('ListCliente')
 ###########################################################################################
 
 def cadPet(request):
@@ -269,6 +279,7 @@ def delPet(request,pk):
 
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return redirect('ListPet')
+
 ###############################################################################
 
 def cadProduto(request):
@@ -301,7 +312,11 @@ def listProduto(request):
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return render(request,'petshopsys_app/Gerente/Cads/list_Produto.html',{'produtos':produtos})
 
-
+def delProduto(request,pk):
+    #busca os dados
+    produto = Produto.objects.filter(pk=pk).delete()
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return redirect('ListProduto')
 ###############################################################################
 
 def cadFuncionario (request):
@@ -338,6 +353,12 @@ def listGerente(request):
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return render(request,'petshopsys_app/Gerente/Cads/list_Gerente.html',{'gerentes':gerentes})
 
+def delGerente(request,pk):
+    #busca os dados
+    gerente = Gerente.objects.filter(pk=pk).delete()
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return redirect('ListGerente')
+
 ################################################################################################
 
 def cadVeterinario(request):
@@ -370,6 +391,11 @@ def listVeterinario(request):
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return render(request,'petshopsys_app/Gerente/Cads/list_Veterinario.html',{'veterinarios':veterinarios})
 
+def delVeterinario(request,pk):
+    #busca os dados
+    veterinario = Veterinario.objects.filter(pk=pk).delete()
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return redirect('ListVeterinario')
 ################################################################################################
 
 def cadCaixa(request):
@@ -402,6 +428,11 @@ def listCaixa(request):
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return render(request,'petshopsys_app/Gerente/Cads/list_Caixa.html',{'caixas':caixas})
 
+def delCaixa(request,pk):
+    #busca os dados
+    caixa = Caixa.objects.filter(pk=pk).delete()
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return redirect('ListCaixa')
 ################################################################################################
 
 def cadEstoque(request):
@@ -433,3 +464,9 @@ def listEstoque(request):
 
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return render(request,'petshopsys_app/Gerente/Cads/list_Estoque.html',{'estoque':estoque})
+
+def delEstoque(request,pk):
+    #busca os dados
+    estoque = Estoque.objects.filter(pk=pk).delete()
+    #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
+    return redirect('ListEstoque')
