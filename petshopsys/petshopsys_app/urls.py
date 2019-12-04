@@ -12,6 +12,7 @@ urlpatterns = [
     path('gerente/',MenuGerente.as_view(),name='MenuGerente'),
     path('caixa/',MenuCaixa.as_view(),name='MenuCaixa'),
     path('veterinario/',MenuVeterinario.as_view(),name='MenuVeterinario'),
+    
 #####################GERENTE#######################
     path('gerente/cadFornecedor/',views.cadFornecedor,name='CadFornecedor'),
     path('gerente/listFornecedor/',views.listFornecedor,name='ListFornecedor'),

@@ -22,6 +22,7 @@ class LoginForm (forms.Form):
         model = Usuario
             
 class FornecedorForm (forms.ModelForm):
+
     class Meta :
         model = Fornecedor
         fields = ('cnpj','nome','endereco','telefone',)
@@ -65,3 +66,5 @@ class EstoqueForm (forms.ModelForm):
     class Meta :
         model = Estoque
         fields = ('cod_produto','quantidade')
+
+# class RegistrarSrvico (forms.ModelForm):

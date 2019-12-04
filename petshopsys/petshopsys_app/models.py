@@ -85,19 +85,6 @@ class Pet (models.Model):
     def __str__ (self):
         return self.nome
 
-class RegistrarConsulta (models.Model):
-    cod_pet = models.ForeignKey (Pet, on_delete = models.CASCADE)
-    cod_veterinario = models.ForeignKey (Veterinario, on_delete = models.CASCADE)
-
-    data_consulta = models.DateTimeField(verbose_name='Data da Consulta')
-    
-    relatorio = models.TextField (verbose_name = 'Relatório')
-
-    data_retorno = models.DateField (verbose_name='Data de Retorno')
-
-    def __str__ (self):
-        return self.relatorio
-
 class Servico (models.Model):
 
     #cod_servico é criado altomaticamente pelo Django
@@ -150,14 +137,26 @@ class ItemCompra (models.Model):
     def __str__ (self):
         return Produto.objects.filter(itemcompra__cod_produto = self.cod_produto).get().nome
 
-class ItemServico (models.Model):
-    cod_servico = models.OneToOneField (Servico,on_delete=models.CASCADE)
-    cod_registrar_sevico = models.ForeignKey (RegistrarConsulta, on_delete=models.CASCADE)
-    quantidade = models.IntegerField (verbose_name = 'Quantidade')
-    preco = models.FloatField (verbose_name = 'Preço')
+class RegistrarConsulta (models.Model):
+    cod_pet = models.ForeignKey (Pet, on_delete = models.CASCADE)
+    cod_veterinario = models.ForeignKey (Veterinario, on_delete = models.CASCADE)
+    cod_servico = models.OneToOneField (Servico,on_delete = models.CASCADE)
+
+    data_consulta = models.DateTimeField(verbose_name='Data da Consulta')
+    
+    relatorio = models.TextField (verbose_name = 'Relatório')
+
+    data_retorno = models.DateField (verbose_name='Data de Retorno')
 
     def __str__ (self):
-        return Servico.objects.filter (itemservico__cod_servico = self.cod_servico).get().nome
+        return self.relatorio
+
+class ItemServico (models.Model):
+    cod_servico = models.ManyToManyField (Servico)
+    cod_registrar_sevico = models.OneToOneField (RegistrarConsulta, on_delete=models.CASCADE)
+    quantidade = models.IntegerField (verbose_name = 'Quantidade')
+    preco = models.FloatField (verbose_name = 'Preço')
+    
 
 class ListaItemServico (models.Model):
     cod_item_servico = models.ManyToManyField (ItemServico)

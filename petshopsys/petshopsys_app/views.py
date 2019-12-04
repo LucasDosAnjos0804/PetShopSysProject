@@ -107,26 +107,13 @@ class MenuCaixa (View):
 class MenuVeterinario (View):
     def get (self,request):
         return render(request,'petshopsys_app/Veterinario/servicos_realizados_pet.html')
+    
+    # def post (self,request):
 
 
 class Cad_Cliente (View):
     def get (self,request):
         return render(request,'petshopsys_app/Gerente/Cads/cad_Cliente.html')
-
-# class CadFornecedor (View):
-#     def post (self,request):
-#         form = FornecedorForm(request.POST)
-
-#         if form.is_valid():
-
-#             fornecedor = form.save(commit=False)
-
-#             fornecedor.save()
-#             return redirect('MenuGerente')
-    
-#     def get (self,request):
-#         form = FornecedorForm()
-#         return render(request, 'petshopsys_app/Gerente/Cads/cad_Fornecedor.html', {'form': form})
 
 def cadFornecedor (request):
     if request.method == "POST":
@@ -470,3 +457,6 @@ def delEstoque(request,pk):
     estoque = Estoque.objects.filter(pk=pk).delete()
     #retorna render, funcao http, o diretorio do tamplate, mensagem ao template
     return redirect('ListEstoque')
+
+##########################################################################
+
